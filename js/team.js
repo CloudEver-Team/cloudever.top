@@ -85,6 +85,13 @@ const teamMembers = [
     quote: "自强不息",
     blog: "https://blog.csdn.net/2301_78846282?type=blog",
   },
+  {
+    id: "pencil_fish",
+    direction: "web",
+    avatar: "https://cloudever.top/images/user/pencil_fish.jpg",
+    quote: "我是一条坐在椅子上的鱼",
+    blog: "https://pencilfishdaydream.fun/",
+  }
 ];
 
 function createMemberCard(member) {
