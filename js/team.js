@@ -35,12 +35,6 @@ const teamMembers = [
     quote: "搞事！搞事！搞事！",
   },
   {
-    id: "shixz",
-    direction: "re",
-    avatar: "https://cloudever.top/images/user/shixz.jpg",
-    quote: "我能打上海major",
-  },
-  {
     id: "YHalo",
     direction: "pwn",
     avatar: "https://cloudever.top/images/user/YHalo.jpg",
@@ -65,6 +59,7 @@ const teamMembers = [
     direction: "web",
     avatar: "https://cloudever.top/images/user/祈染安.jpg",
     quote: "当观水月，莫怨松风",
+    blog: "https://qiranan.github.io/",
   },
   {
     id: "陌丄未央",
@@ -77,13 +72,14 @@ const teamMembers = [
     direction: "re",
     avatar: "https://cloudever.top/images/user/Pretend.jpg",
     quote: " 试试就试试!",
+    blog: "https://pretend-art.github.io/",
   },
   {
     id: "晨昏蒙影",
     direction: "web",
     avatar: "https://cloudever.top/images/user/晨昏蒙影.jpg",
     quote: "自强不息",
-    blog: "https://blog.csdn.net/2301_78846282?type=blog",
+    blog: "https://grrchmy.cn/",
   },
 ];
 
