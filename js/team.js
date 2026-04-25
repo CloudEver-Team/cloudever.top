@@ -566,6 +566,7 @@ function setupTerminal() {
     terminalMode = "shell";
     linuxState.ready = false;
     linuxState.booting = false;
+    linuxState.silent = false;
     linuxState.serialBuffer = "";
     linuxState.promptWaiters.splice(0).forEach((waiter) => {
       window.clearTimeout(waiter.timeout);
@@ -612,6 +613,7 @@ function setupTerminal() {
     }
 
     linuxState.booting = true;
+    linuxState.silent = true;
     setInputBusy(true, "booting wasm linux");
 
     const statusLine = document.createElement("div");
@@ -671,10 +673,9 @@ function setupTerminal() {
 
       terminalMode = "linux";
       linuxState.ready = true;
+      linuxState.silent = false;
       statusLine.textContent = "linux init [ready]";
-      appendLine("CloudEver wasm-linux ready. Try `cat /flag` or `exit-linux`.", "ok");
       linuxState.serialBuffer = "";
-      emulator.serial0_send("\n");
     } catch (error) {
       await destroyLinux();
       statusLine.textContent = "linux init [failed]";
