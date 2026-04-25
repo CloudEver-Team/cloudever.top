@@ -4,431 +4,202 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CloudEver - CTF战队</title>
+  <meta name="description" content="CloudEver Team - 云南大学 CTF 校队官网" />
+  <title>CloudEver Team</title>
+  <link rel="preload" as="image" href="images/banner.jpg" />
+  <link rel="preload" as="image" href="images/logo-symbol.png" />
   <link rel="stylesheet" href="css/all.min.css" />
   <link rel="stylesheet" href="css/css2.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="nav-container">
-      <div class="logo">
-        <div class="logo-icon" style="
-              background: linear-gradient(135deg, #0a0e17 60%, #00e6f6 100%);
-              border-radius: 50%;
-              box-shadow: 0 4px 16px rgba(0, 230, 246, 0.35);
-              padding: 8px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            ">
-          <img src="https://cloudever.top/images/ce.png" alt="CloudEver Logo" style="
-                height: 44px;
-                width: 44px;
-                object-fit: contain;
-                filter: drop-shadow(0 0 12px #00e6f6) brightness(1.2);
-              " />
-        </div>
-        <div class="logo-text">CloudEver</div>
-      </div>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="#home" class="nav-link">首页</a></li>
-        <!-- <li class="nav-item"><a href="#about" class="nav-link">方向</a></li> -->
-        <li class="nav-item"><a href="#team" class="nav-link">队员</a></li>
-        <li class="nav-item">
-          <a href="#achievements" class="nav-link">战绩</a>
-        </li>
-        <li class="nav-item"><a href="#contact" class="nav-link">加入</a></li>
-        <!-- <li class="nav-item">
-            <a
-              href="https://enoch.host/archives/ynuctf-2025-wp"
-              class="nav-link"
-              target="_blank"
-              >YUNCTF</a
-            >
-          </li> -->
-      </ul>
-    </div>
+  <header class="site-header" data-header>
+    <a class="brand" href="#home" aria-label="CloudEver 首页">
+      <span class="brand-mark">
+        <img src="images/logo-symbol.png" alt="" />
+      </span>
+      <span class="brand-copy">
+        <strong>CloudEver</strong>
+        <span>YNU CTF Team</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <i class="fas fa-bars" aria-hidden="true"></i>
+      <span class="sr-only">打开导航</span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="主导航" data-nav>
+      <a href="#home">首页</a>
+      <a href="#team">队员</a>
+      <a href="#achievements">战绩</a>
+      <a href="#contact">加入</a>
+    </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="particles" id="particles"></div>
-    <div class="hero-content">
-      <div class="hero-tagline">YNU CTF</div>
-      <h1 class="hero-title">CloudEver<br />Team</h1>
-      <p class="hero-subtitle">
-        云南大学CTF校队，成立于2024，致力于网络安全研究、漏洞分析与CTF赛事。迄今为止战队已经在多场重要比赛中获奖，多名队员任职于Nu1l安全团队，山海关安全团队，星盟安全团队，V&N安全团队，阿里云，南天信息等企业。
-      </p>
-      <a href="#contact" class="hero-btn">加入我们</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero" id="home" data-section>
+      <img class="hero-full-image" src="images/banner.jpg" alt="CloudEver CTF Team" />
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-copy">
+            <h1>CloudEver Team</h1>
+            <p class="hero-subtitle">
+              云南大学CTF校队，成立于2024，致力于网络安全研究、漏洞分析与CTF赛事。迄今为止战队已经在多场重要比赛中获奖，多名队员任职于Nu1l安全团队，山海关安全团队，星盟安全团队，V&N安全团队，阿里云，南天信息等企业。
+            </p>
+          </div>
 
-  <!-- About Section
-    <section class="section" id="about">
-      <h2 class="section-title">主要方向</h2>
+          <div class="hero-ops">
+            <div class="hero-status" aria-label="战队概览">
+              <div class="stat-item">
+                <span>Since</span>
+                <strong>2024</strong>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span>Roster</span>
+                <strong>13+</strong>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span>Honors</span>
+                <strong>10+</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="section team-section" id="team" data-section>
       <div class="container">
-        <div class="grid">
-          <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-microchip"></i>
-            </div>
-            <h3 class="card-title">二进制安全</h3>
-            <p class="card-text">
-              研究PWN、缓冲区溢出、堆栈溢出、格式化字符串等漏洞利用，针对二进制程序进行分析与漏洞挖掘。
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-network-wired"></i>
-            </div>
-            <h3 class="card-title">内网渗透</h3>
-            <p class="card-text">
-              熟悉内网信息收集、横向移动、权限提升等攻防技术，模拟真实攻击场景。
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-code"></i>
-            </div>
-            <h3 class="card-title">逆向工程</h3>
-            <p class="card-text">
-              反汇编与反编译高级恶意软件，分析攻击原理、加密逻辑与传播方式。
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-globe"></i>
-            </div>
-            <h3 class="card-title">WEB安全</h3>
-            <p class="card-text">
-              针对XSS、SQL注入、CSRF等Web攻防技术，关注Web框架安全加固与漏洞修复。
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-puzzle-piece"></i>
-            </div>
-            <h3 class="card-title">区块链</h3>
-            <p class="card-text">
-              研究区块链技术及其在安全领域的应用，分析智能合约漏洞与攻击方式。
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <i class="fas fa-key"></i>
-            </div>
-            <h3 class="card-title">密码学</h3>
-            <p class="card-text">
-              精通对称加密、非对称加密、哈希算法与密码协议分析，破解CTF中的各类加密题目，研究前沿密码技术。
-            </p>
-          </div>
+        <div class="section-head reveal">
+          <p class="eyebrow">Roster</p>
+          <h2>核心队员</h2>
+          <p>不同方向并行推进，比赛场上互相补位，赛后把 writeup、工具和经验继续沉淀。</p>
+        </div>
+
+        <div class="team-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section achievements-section" id="achievements" data-section>
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Scoreboard</p>
+          <h2>荣誉战绩</h2>
+          <p>把训练场上的稳定输出，落进公开赛、区域赛、实网攻防和高危漏洞成果里。</p>
+        </div>
+
+        <div class="scoreboard">
+          <ol class="achievement-list">
+            <li class="reveal">
+              <time>2025</time>
+              <span>CTFtime 排名全国第 24（统计日期 4.24）</span>
+            </li>
+            <li class="reveal">
+              <time>2025</time>
+              <span>第十八届全国大学生信息安全竞赛创新实践能力赛半决赛 二等奖</span>
+            </li>
+            <li class="reveal">
+              <time>2025</time>
+              <span>软件系统安全赛西南区域赛一等奖</span>
+            </li>
+            <li class="reveal">
+              <time>2025</time>
+              <span>数字中国数据安全赛国家级铜奖</span>
+            </li>
+            <li class="reveal">
+              <time>2025</time>
+              <span>第十八届全国大学生信息安全竞赛创新实践能力赛西南分区选拔赛 三等奖</span>
+            </li>
+            <li class="reveal">
+              <time>2025</time>
+              <span>云南省实网攻防演练学生组第二（lally）</span>
+            </li>
+            <li class="reveal">
+              <time>2025</time>
+              <span>云南省护航云网二进制逆向挑战赛学生组第三（llk）</span>
+            </li>
+            <li class="reveal">
+              <time>2025</time>
+              <span>蓝桥杯网络安全赛道国三（ENOCH）</span>
+            </li>
+            <li class="reveal">
+              <time>2025</time>
+              <span>第二届腾讯黑客松智能渗透挑战赛全国第十九名</span>
+            </li>
+            <li class="reveal">
+              <time>2024</time>
+              <span>中国工业互联网安全大赛三等奖</span>
+            </li>
+            <li class="reveal">
+              <time>2024</time>
+              <span>第十七届全国大学生信息安全竞赛创新实践能力赛西南分区选拔赛三等奖</span>
+            </li>
+          </ol>
         </div>
       </div>
-    </section> -->
+    </section>
 
-  <!-- Team Section -->
-  <section class="section" id="team">
-    <h2 class="section-title">核心队员</h2>
-    <div class="container">
-      <div class="team-grid">
-        <!-- 队员卡片由 js/team.js 自动渲染 -->
+    <section class="join-section" id="contact" data-section>
+      <div class="join-media" aria-hidden="true">
+        <img src="images/logo-symbol.png" alt="" />
       </div>
-    </div>
-  </section>
 
-  <!-- Achievements -->
-  <section class="section" id="achievements">
-    <div class="container">
-      <h2 class="section-title">荣誉战绩</h2>
-      <div style="
-            max-width: 700px;
-            margin: 40px auto 0;
-            padding: 0;
-            text-align: center;
-          ">
-        <div style="font-size: 1.2rem; line-height: 2">
-          <div>
-            2024 第十七届全国大学生信息安全竞赛创新实践能力赛西南分区选拔赛 -
-            三等奖
-          </div>
-          <div>2024 中国工业互联网安全大赛 - 三等奖</div>
-          <div>
-            2025 第十八届全国大学生信息安全竞赛创新实践能力赛半决赛 — 二等奖
-          </div>
-          <div>2025 蓝桥杯网络安全赛道 - 国三（ENOCH）</div>
-          <div>高危CVE（FreesStanding）</div>
-          <div>2025 云南省实网攻防演练学生组第二（lally）</div>
-          <div>2025 云南省护航云网二进制逆向挑战赛学生组第三（llk）</div>
-          <div>2025 第十八届全国大学生信息安全竞赛创新实践能力赛西南分区选拔赛 -
-            三等奖</div>
-          <div>2025 软件系统安全赛西南区域赛一等奖</div>
-          <div>2025 数字中国数据安全赛国家级铜奖</div>
-          <div>第二届腾讯黑客松智能渗透挑战赛全国第十九名</div>
-          <div>ctftime排名全国第24（统计日期4.24）</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer" id="contact">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h3 class="footer-title">加入我们</h3>
-          <p class="footer-text">
-            我们定期举办面向大一的招新赛事，其他年级也可以发送简历申请加入
-          </p>
-          <button id="join-btn" class="hero-btn" style="
-                display: inline-block;
-                margin-top: 20px;
-                border: none;
-                cursor: pointer;
-              ">
-            申请加入
+      <div class="container join-content reveal">
+        <p class="eyebrow">Join The Line</p>
+        <h2>准备好进入 CloudEver？</h2>
+        <p>
+          我们定期举办面向大一的招新赛事，其他年级也可以投递简历申请加入。保持好奇，带上作品，来打一场真正能留下痕迹的仗。
+        </p>
+        <div class="join-actions">
+          <button class="btn btn-primary" type="button" data-open-join>
+            <i class="fab fa-qq" aria-hidden="true"></i>
+            <span>获取 QQ 群</span>
           </button>
-          <div id="join-modal" style="
-                display: none;
-                position: fixed;
-                left: 0;
-                top: 0;
-                width: 100vw;
-                height: 100vh;
-                background: rgba(10, 14, 23, 0.85);
-                z-index: 9999;
-                align-items: center;
-                justify-content: center;
-              ">
-            <div style="
-                  background: var(--dark-card);
-                  border-radius: 18px;
-                  box-shadow: 0 8px 32px rgba(0, 230, 246, 0.15);
-                  padding: 40px 32px;
-                  max-width: 90vw;
-                  width: 340px;
-                  text-align: center;
-                  position: relative;
-                ">
-              <span id="close-modal" style="
-                    position: absolute;
-                    top: 18px;
-                    right: 22px;
-                    font-size: 1.5rem;
-                    color: var(--primary);
-                    cursor: pointer;
-                  "><i class="fas fa-times"></i></span>
-              <div style="
-                    font-family: 'Orbitron', sans-serif;
-                    font-size: 1.3rem;
-                    color: var(--primary);
-                    margin-bottom: 18px;
-                    letter-spacing: 1px;
-                  ">
-                加入方式
-              </div>
-              <div style="
-                    color: var(--light-text);
-                    font-size: 1.1rem;
-                    margin-bottom: 18px;
-                    line-height: 1.7;
-                  ">
-                请加入QQ群以联系我们
-                <span style="color: var(--primary); font-weight: 700">785858011</span><br />
-                <!-- 或发送邮件至
-                  <span style="color: var(--primary); font-weight: 700"
-                    >wp@cloudever.top</span
-                  > -->
-              </div>
-              <button id="close-btn" class="hero-btn" style="
-                    margin-top: 10px;
-                    background: linear-gradient(
-                      45deg,
-                      var(--primary),
-                      var(--accent)
-                    );
-                    color: var(--dark-bg);
-                    border: none;
-                    border-radius: 22px;
-                    padding: 10px 32px;
-                    font-size: 1rem;
-                    cursor: pointer;
-                  ">
-                我知道了
-              </button>
-            </div>
-          </div>
-          <script>
-            document.addEventListener("DOMContentLoaded", function () {
-              var joinBtn = document.getElementById("join-btn");
-              var joinModal = document.getElementById("join-modal");
-              var closeModal = document.getElementById("close-modal");
-              var closeBtn = document.getElementById("close-btn");
-              var modalBox = joinModal.querySelector("div");
-
-              var style = document.createElement("style");
-              style.innerHTML = `
-                                #join-modal[style*="display: flex"] > div {
-                                    animation: modalFadeIn 0.35s cubic-bezier(.4,2,.6,1) both;
-                                }
-                                @keyframes modalFadeIn {
-                                    0% { opacity: 0; transform: scale(0.85) translateY(40px);}
-                                    100% { opacity: 1; transform: scale(1) translateY(0);}
-                                }
-                                #join-modal.modal-hide > div {
-                                    animation: modalFadeOut 0.25s cubic-bezier(.4,2,.6,1) both;
-                                }
-                                @keyframes modalFadeOut {
-                                    0% { opacity: 1; transform: scale(1) translateY(0);}
-                                    100% { opacity: 0; transform: scale(0.85) translateY(40px);}
-                                }
-                            `;
-              document.head.appendChild(style);
-
-              joinBtn.onclick = function () {
-                joinModal.style.display = "flex";
-                joinModal.classList.remove("modal-hide");
-              };
-              function closeModalFunc() {
-                joinModal.classList.add("modal-hide");
-                setTimeout(function () {
-                  joinModal.style.display = "none";
-                  joinModal.classList.remove("modal-hide");
-                }, 250);
-              }
-              closeModal.onclick = closeBtn.onclick = closeModalFunc;
-            });
-          </script>
-        </div>
-        <div>
-          <h3 class="footer-title">联系我们</h3>
-          <ul class="contact-list">
-            <li class="contact-item">
-              <div class="contact-icon">
-                <i class="fab fa-qq"></i>
-              </div>
-              <div>QQ群: 785858011</div>
-            </li>
-            <li class="contact-item">
-              <div class="contact-icon">
-                <i class="far fa-envelope"></i>
-              </div>
-              <div>邮箱: wp@cloudever.top</div>
-            </li>
-            <!-- <li class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fab fa-github"></i>
-                            </div>
-                            <div>GitHub: </div>
-                        </li> -->
-          </ul>
+          <a class="btn btn-secondary" href="mailto:wp@cloudever.top">
+            <i class="far fa-envelope" aria-hidden="true"></i>
+            <span>发送邮件</span>
+          </a>
         </div>
       </div>
-      <div class="copyright">
-        &copy; 2025-2026 CloudEver | YNUCTF. All rights reserved.
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>CloudEver</strong>
+        <span>YNU CTF Team</span>
       </div>
+      <p>&copy; 2025-2026 CloudEver. All rights reserved.</p>
     </div>
   </footer>
 
+  <div class="modal" id="join-modal" hidden>
+    <div class="modal-backdrop" data-close-join></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="join-title">
+      <button class="modal-close" type="button" aria-label="关闭" data-close-join>
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+      <p class="eyebrow">Recruit Channel</p>
+      <h2 id="join-title">加入方式</h2>
+      <p>请加入 QQ 群联系我们，或通过邮箱发送简历与作品。</p>
+      <div class="contact-chip">
+        <i class="fab fa-qq" aria-hidden="true"></i>
+        <span>785858011</span>
+      </div>
+      <a class="contact-chip" href="mailto:wp@cloudever.top">
+        <i class="far fa-envelope" aria-hidden="true"></i>
+        <span>wp@cloudever.top</span>
+      </a>
+    </div>
+  </div>
+
   <script src="js/team.js"></script>
-  <script>
-    function createParticles() {
-      const particlesContainer = document.getElementById("particles");
-      const particleCount = 30;
-
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement("div");
-        particle.classList.add("particle");
-
-        const size = Math.random() * 5 + 2;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-
-        const animationDuration = Math.random() * 20 + 10;
-        const animationDelay = Math.random() * 5;
-        particle.style.animation = `float ${animationDuration}s ${animationDelay}s infinite linear`;
-
-        particlesContainer.appendChild(particle);
-      }
-
-      const style = document.createElement("style");
-      document.head.appendChild(style);
-      style.sheet.insertRule(`
-            @keyframes float {
-                0% {
-                    transform: translate(0, 0) rotate(0deg);
-                    opacity: 0.3;
-                }
-                25% {
-                    opacity: 0.6;
-                }
-                50% {
-                    opacity: 0.3;
-                }
-                75% {
-                    opacity: 0.1;
-                }
-                100% {
-                    transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50
-        }px) rotate(${Math.random() * 360}deg);
-                    opacity: 0.3;
-                }
-            }
-        `);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      createParticles();
-
-      const globalStyles = document.createElement("style");
-      document.head.appendChild(globalStyles);
-      globalStyles.sheet.insertRule(`
-            .visible {
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-            }
-        `);
-
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
-        });
-      });
-
-      const observerOptions = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      }, observerOptions);
-
-      document
-        .querySelectorAll(".section, .card, .member-card")
-        .forEach((el) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(20px)";
-          el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-
-          observer.observe(el);
-        });
-    });
-  </script>
 </body>
 
 </html>
