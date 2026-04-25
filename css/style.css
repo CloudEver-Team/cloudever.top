@@ -697,6 +697,18 @@ img {
   color: rgba(240, 184, 92, 0.96);
 }
 
+.terminal-line.ok {
+  color: rgba(113, 239, 171, 0.96);
+}
+
+.terminal-line.boot {
+  color: rgba(120, 239, 255, 0.96);
+}
+
+.terminal-line.vm {
+  color: rgba(232, 247, 255, 0.9);
+}
+
 .terminal-input-line {
   position: relative;
   z-index: 1;
@@ -725,6 +737,10 @@ img {
   caret-color: var(--cyan);
   font-family: inherit;
   font-size: 0.86rem;
+}
+
+.terminal-input-line input:disabled {
+  opacity: 0.72;
 }
 
 .hero-actions,

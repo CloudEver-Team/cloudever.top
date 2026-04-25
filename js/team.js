@@ -338,10 +338,20 @@ function setupTerminal() {
   const hero = document.querySelector(".hero");
   if (!output || !input) return;
 
+  const v86Assets = {
+    script: "assets/v86/libv86.js",
+    wasm: "assets/v86/v86.wasm",
+    bios: "assets/v86/seabios.bin",
+    vgaBios: "assets/v86/vgabios.bin",
+    kernel: "assets/v86/buildroot-bzimage68.bin",
+  };
   const history = [];
   let historyIndex = 0;
   let currentDirectory = "/";
+  let terminalMode = "shell";
   let booted = false;
+  let streamLine = null;
+  let ansiSkipMode = "";
   const flag = "flag{join_cloudEver_and_capture_the_real_one}";
   const fileSystem = {
     "/": ["bin/", "home/", "tmp/", "flag"],
@@ -353,11 +363,107 @@ function setupTerminal() {
   const hasDirectory = (path) => Object.prototype.hasOwnProperty.call(fileSystem, path);
 
   const appendLine = (text, className = "") => {
+    streamLine = null;
     const line = document.createElement("div");
     line.className = className ? `terminal-line ${className}` : "terminal-line";
     line.textContent = text;
     output.appendChild(line);
     output.scrollTop = output.scrollHeight;
+  };
+
+  const appendStream = (text, className = "vm") => {
+    Array.from(text).forEach((character) => {
+      if (ansiSkipMode) {
+        if (ansiSkipMode === "escape") {
+          if (character === "[") {
+            ansiSkipMode = "csi";
+            return;
+          }
+          if (character === "]") {
+            ansiSkipMode = "osc";
+            return;
+          }
+          if (character === "P" || character === "^" || character === "_") {
+            ansiSkipMode = "string";
+            return;
+          }
+          ansiSkipMode = "";
+          return;
+        }
+
+        if (ansiSkipMode === "csi") {
+          if (character >= "@" && character <= "~") {
+            ansiSkipMode = "";
+          }
+          return;
+        }
+
+        if (ansiSkipMode === "osc") {
+          if (character === "\u0007") {
+            ansiSkipMode = "";
+          } else if (character === "\u001b") {
+            ansiSkipMode = "osc-escape";
+          }
+          return;
+        }
+
+        if (ansiSkipMode === "osc-escape") {
+          ansiSkipMode = character === "\\" ? "" : "osc";
+          return;
+        }
+
+        if (ansiSkipMode === "string") {
+          if (character === "\u001b") {
+            ansiSkipMode = "string-escape";
+          }
+          return;
+        }
+
+        if (ansiSkipMode === "string-escape") {
+          ansiSkipMode = character === "\\" ? "" : "string";
+          return;
+        }
+      }
+
+      if (character === "\u001b") {
+        ansiSkipMode = "escape";
+        return;
+      }
+
+      if (character === "\u009b") {
+        ansiSkipMode = "csi";
+        return;
+      }
+
+      if (character === "\r") return;
+
+      if (character === "\n") {
+        streamLine = null;
+        output.scrollTop = output.scrollHeight;
+        return;
+      }
+
+      if (character === "\b" || character === "\u007f") {
+        if (streamLine) {
+          streamLine.textContent = streamLine.textContent.slice(0, -1);
+        }
+        return;
+      }
+
+      if (!streamLine) {
+        streamLine = document.createElement("div");
+        streamLine.className = `terminal-line ${className}`;
+        output.appendChild(streamLine);
+      }
+
+      streamLine.textContent += character;
+      output.scrollTop = output.scrollHeight;
+    });
+  };
+
+  const setInputBusy = (isBusy, label = "") => {
+    input.disabled = isBusy;
+    input.placeholder = label;
   };
 
   const runBoot = () => {
@@ -388,14 +494,225 @@ function setupTerminal() {
     return `/${stack.join("/")}`.replace(/\/$/, "") || "/";
   };
 
-  const respond = (command) => {
+  const resolveAsset = (path) => new URL(path, document.baseURI).href;
+
+  const loadV86Script = () => {
+    if (window.V86) return Promise.resolve();
+    if (window.__cloudEverV86Loader) return window.__cloudEverV86Loader;
+
+    window.__cloudEverV86Loader = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = resolveAsset(v86Assets.script);
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error("failed to load local v86 runtime"));
+      document.head.appendChild(script);
+    });
+
+    return window.__cloudEverV86Loader;
+  };
+
+  const linuxState = {
+    emulator: null,
+    booting: false,
+    ready: false,
+    silent: false,
+    serialBuffer: "",
+    promptWaiters: [],
+  };
+
+  const isLinuxPrompt = () => /(?:^|\n)[^\n]*(?:[%#$] )$/.test(linuxState.serialBuffer.slice(-240));
+
+  const flushPromptWaiters = () => {
+    if (!isLinuxPrompt()) return;
+    const waiters = linuxState.promptWaiters.splice(0);
+    waiters.forEach((waiter) => {
+      window.clearTimeout(waiter.timeout);
+      waiter.resolve();
+    });
+  };
+
+  const waitForLinuxPrompt = (timeout = 90000) =>
+    new Promise((resolve, reject) => {
+      const waiter = {
+        resolve,
+        reject,
+        timeout: window.setTimeout(() => {
+          linuxState.promptWaiters = linuxState.promptWaiters.filter((item) => item !== waiter);
+          reject(new Error("Linux boot timed out before the shell prompt appeared"));
+        }, timeout),
+      };
+
+      linuxState.promptWaiters.push(waiter);
+      flushPromptWaiters();
+    });
+
+  const sendLinuxCommand = async (command, timeout, options = {}) => {
+    const wasSilent = linuxState.silent;
+    linuxState.serialBuffer = "";
+    linuxState.silent = Boolean(options.silent);
+
+    try {
+      linuxState.emulator.serial0_send(`${command}\n`);
+      await waitForLinuxPrompt(timeout);
+    } finally {
+      linuxState.silent = wasSilent;
+      streamLine = null;
+      ansiSkipMode = "";
+    }
+  };
+
+  const destroyLinux = async () => {
+    terminalMode = "shell";
+    linuxState.ready = false;
+    linuxState.booting = false;
+    linuxState.serialBuffer = "";
+    linuxState.promptWaiters.splice(0).forEach((waiter) => {
+      window.clearTimeout(waiter.timeout);
+      waiter.reject?.(new Error("Linux session closed"));
+    });
+
+    if (!linuxState.emulator) return;
+
+    const emulator = linuxState.emulator;
+    linuxState.emulator = null;
+    try {
+      await emulator.stop?.();
+      await emulator.destroy?.();
+    } catch (error) {
+      console.warn("Failed to destroy v86 session", error);
+    }
+  };
+
+  const escapeSingleQuotedShell = (text) => text.replace(/'/g, "'\\''");
+
+  const runInitAnimation = (line) => {
+    const frames = ["[          ]", "[=         ]", "[===       ]", "[=====     ]", "[=======   ]", "[========= ]", "[==========]"];
+    let frame = 0;
+
+    line.classList.add("boot");
+    line.textContent = `linux init ${frames[0]}`;
+
+    return window.setInterval(() => {
+      frame = (frame + 1) % frames.length;
+      line.textContent = `linux init ${frames[frame]}`;
+    }, 150);
+  };
+
+  const startLinux = async () => {
+    if (linuxState.booting) {
+      appendLine("linux: boot already in progress", "warn");
+      return;
+    }
+
+    if (linuxState.ready && linuxState.emulator) {
+      terminalMode = "linux";
+      appendLine("linux: already running, serial console attached", "ok");
+      return;
+    }
+
+    linuxState.booting = true;
+    setInputBusy(true, "booting wasm linux");
+
+    const statusLine = document.createElement("div");
+    statusLine.className = "terminal-line boot";
+    output.appendChild(statusLine);
+    output.scrollTop = output.scrollHeight;
+    const initTimer = runInitAnimation(statusLine);
+
+    try {
+      if (window.location.protocol === "file:") {
+        throw new Error("open this page through http:// or https:// to boot local wasm assets");
+      }
+
+      await loadV86Script();
+      statusLine.textContent = "linux init [core loaded]";
+
+      if (!window.V86) {
+        throw new Error("local v86 runtime did not expose V86");
+      }
+
+      const emulator = new window.V86({
+        wasm_path: resolveAsset(v86Assets.wasm),
+        bios: { url: resolveAsset(v86Assets.bios) },
+        vga_bios: { url: resolveAsset(v86Assets.vgaBios) },
+        bzimage: {
+          url: resolveAsset(v86Assets.kernel),
+          async: false,
+        },
+        filesystem: {},
+        memory_size: 64 * 1024 * 1024,
+        vga_memory_size: 8 * 1024 * 1024,
+        cmdline: "tsc=reliable mitigations=off random.trust_cpu=on console=ttyS0",
+        autostart: true,
+        disable_keyboard: true,
+        disable_mouse: true,
+        disable_speaker: true,
+      });
+
+      linuxState.emulator = emulator;
+      linuxState.serialBuffer = "";
+
+      emulator.add_listener("serial0-output-byte", (byte) => {
+        const character = String.fromCharCode(byte);
+        if (character !== "\r") {
+          linuxState.serialBuffer = (linuxState.serialBuffer + character).slice(-8192);
+        }
+        if (!linuxState.silent) {
+          appendStream(character);
+        }
+        flushPromptWaiters();
+      });
+
+      statusLine.textContent = "linux init [kernel loading]";
+      await waitForLinuxPrompt();
+      statusLine.textContent = "linux init [planting /flag]";
+      await sendLinuxCommand(`printf '%s\\n' '${escapeSingleQuotedShell(flag)}' > /flag`, 20000, { silent: true });
+
+      terminalMode = "linux";
+      linuxState.ready = true;
+      statusLine.textContent = "linux init [ready]";
+      appendLine("CloudEver wasm-linux ready. Try `cat /flag` or `exit-linux`.", "ok");
+      linuxState.serialBuffer = "";
+      emulator.serial0_send("\n");
+    } catch (error) {
+      await destroyLinux();
+      statusLine.textContent = "linux init [failed]";
+      appendLine(`linux: ${error.message}`, "warn");
+      appendLine("CloudEver shell is still available.", "warn");
+    } finally {
+      window.clearInterval(initTimer);
+      linuxState.booting = false;
+      setInputBusy(false);
+      input.focus();
+    }
+  };
+
+  const respond = async (command) => {
+    if (terminalMode === "linux") {
+      if (command === "exit-linux") {
+        await destroyLinux();
+        appendLine("returned to CloudEver shell", "ok");
+        return;
+      }
+
+      if (!linuxState.emulator) {
+        terminalMode = "shell";
+        appendLine("linux: serial console is not attached", "warn");
+        return;
+      }
+
+      linuxState.emulator.serial0_send(`${command}\n`);
+      return;
+    }
+
     if (command === "clear") {
       output.replaceChildren();
       return;
     }
 
     if (command === "help") {
-      appendLine("commands: help, ls, pwd, cd, cat /flag, whoami, uname, clear");
+      appendLine("commands: help, ls, pwd, cd, cat /flag, whoami, uname, linux, clear");
       return;
     }
 
@@ -455,19 +772,26 @@ function setupTerminal() {
       return;
     }
 
+    if (command === "linux") {
+      await startLinux();
+      return;
+    }
+
     appendLine(`command not found: ${command || "(empty)"}`, "warn");
   };
 
-  input.addEventListener("keydown", (event) => {
+  input.addEventListener("keydown", async (event) => {
     if (event.key === "Enter") {
       const command = input.value.trim();
-      appendLine(`$ ${command}`, "command");
+      if (terminalMode === "shell") {
+        appendLine(`$ ${command}`, "command");
+      }
       if (command) {
         history.push(command);
         historyIndex = history.length;
       }
       input.value = "";
-      respond(command);
+      await respond(command);
       return;
     }
 
