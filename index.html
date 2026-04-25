@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="CloudEver Team - 云南大学 CTF 校队官网" />
   <title>CloudEver Team</title>
+  <script>document.documentElement.classList.add("js-enabled");</script>
   <link rel="preload" as="image" href="images/banner.jpg" />
   <link rel="preload" as="image" href="images/logo-symbol.png" />
   <link rel="stylesheet" href="css/all.min.css" />
@@ -46,7 +47,7 @@
           <div class="hero-copy">
             <h1>CloudEver Team</h1>
             <p class="hero-subtitle">
-              云南大学CTF校队，成立于2024，致力于网络安全研究、漏洞分析与CTF赛事。迄今为止战队已经在多场重要比赛中获奖，多名队员任职于Nu1l安全团队，山海关安全团队，星盟安全团队，V&N安全团队，阿里云，南天信息等企业。
+              云南大学CTF校队，成立于2024，致力于网络安全研究、漏洞分析与CTF赛事。迄今为止战队已经在多场重要比赛中获奖，多名队员任职于Nu1l安全团队，山海关安全团队，星盟安全团队，V&N安全团队，阿里云，南天信息等。
             </p>
           </div>
 
@@ -69,6 +70,30 @@
             </div>
           </div>
         </div>
+
+        <aside class="hero-dashboard" data-hero-hud aria-label="CloudEver operation console">
+          <div class="hud-panel code-panel" data-hud-drag="rotor">
+            <div class="hud-topline">
+              <span>booting</span>
+              <i aria-hidden="true"></i>
+            </div>
+            <div class="code-orbit">
+              <pre class="orbit-canvas" data-ascii-orbit aria-hidden="true"></pre>
+            </div>
+          </div>
+
+          <div class="hud-panel terminal-panel" data-hud-drag="terminal">
+            <div class="hud-topline">
+              <span>guest@cloudever</span>
+              <i aria-hidden="true"></i>
+            </div>
+            <div class="terminal-output" data-terminal-output aria-live="polite"></div>
+            <label class="terminal-input-line">
+              <span>$</span>
+              <input data-terminal-input type="text" autocomplete="off" spellcheck="false" aria-label="Terminal command" />
+            </label>
+          </div>
+        </aside>
       </div>
 
     </section>
@@ -78,7 +103,6 @@
         <div class="section-head reveal">
           <p class="eyebrow">Roster</p>
           <h2>核心队员</h2>
-          <p>不同方向并行推进，比赛场上互相补位，赛后把 writeup、工具和经验继续沉淀。</p>
         </div>
 
         <div class="team-grid" aria-live="polite"></div>
@@ -90,15 +114,10 @@
         <div class="section-head reveal">
           <p class="eyebrow">Scoreboard</p>
           <h2>荣誉战绩</h2>
-          <p>把训练场上的稳定输出，落进公开赛、区域赛、实网攻防和高危漏洞成果里。</p>
         </div>
 
         <div class="scoreboard">
           <ol class="achievement-list">
-            <li class="reveal">
-              <time>2025</time>
-              <span>CTFtime 排名全国第 24（统计日期 4.24）</span>
-            </li>
             <li class="reveal">
               <time>2025</time>
               <span>第十八届全国大学生信息安全竞赛创新实践能力赛半决赛 二等奖</span>
@@ -150,17 +169,18 @@
       </div>
 
       <div class="container join-content reveal">
-        <p class="eyebrow">Join The Line</p>
-        <h2>准备好进入 CloudEver？</h2>
+        <p class="eyebrow">Join Us
+        </p>
+        <h2>加入 CloudEver？</h2>
         <p>
-          我们定期举办面向大一的招新赛事，其他年级也可以投递简历申请加入。保持好奇，带上作品，来打一场真正能留下痕迹的仗。
+          我们定期举办面向大一的招新赛事，其他年级也可以投递简历申请加入
         </p>
         <div class="join-actions">
           <button class="btn btn-primary" type="button" data-open-join>
             <i class="fab fa-qq" aria-hidden="true"></i>
             <span>获取 QQ 群</span>
           </button>
-          <a class="btn btn-secondary" href="mailto:wp@cloudever.top">
+          <a class="btn btn-secondary" href="mailto:root@cloudever.top">
             <i class="far fa-envelope" aria-hidden="true"></i>
             <span>发送邮件</span>
           </a>
@@ -192,9 +212,9 @@
         <i class="fab fa-qq" aria-hidden="true"></i>
         <span>785858011</span>
       </div>
-      <a class="contact-chip" href="mailto:wp@cloudever.top">
+      <a class="contact-chip" href="mailto:root@cloudever.top">
         <i class="far fa-envelope" aria-hidden="true"></i>
-        <span>wp@cloudever.top</span>
+        <span>root@cloudever.top</span>
       </a>
     </div>
   </div>
