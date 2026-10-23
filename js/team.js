@@ -5,6 +5,7 @@ const teamMembers = [
     avatar: "images/user/llk.jpg",
     quote: "Founder",
     blog: "https://blog.csdn.net/llovewuzhengzi",
+    destination: "阿里巴巴 · 任职",
   },
   {
     id: "ENOCH",
@@ -12,6 +13,7 @@ const teamMembers = [
     avatar: "images/user/ENOCH.jpg",
     quote: "现任队长",
     blog: "https://enoch.host",
+    destination: "在校",
   },
   {
     id: "火锅要加辣",
@@ -19,6 +21,8 @@ const teamMembers = [
     avatar: "images/user/gw.jpg",
     quote: "活在舒服的生命节奏里",
     blog: "https://lally.top",
+    destination: "上科大 & 上海创芯学院 联培直博",
+    destinationNote: "婉拒电子科技大学",
   },
   {
     id: "FFreestanding",
@@ -26,12 +30,14 @@ const teamMembers = [
     avatar: "images/user/yxz.jpg",
     quote: "先放着",
     blog: "https://www.yuque.com/ffreestanding/kernelpwn",
+    destination: "中科院信工所 · 读研",
   },
   {
     id: "liuyan",
     direction: "re",
     avatar: "images/user/momo.jfif",
     quote: "搞事！搞事！搞事！",
+    destination: "美团 · 任职",
   },
   {
     id: "YHalo",
@@ -39,6 +45,7 @@ const teamMembers = [
     avatar: "images/user/YHalo.jpg",
     quote: "我受够了繁文缛节",
     blog: "https://yhalo.cn",
+    destination: "在校",
   },
   {
     id: "s1rius",
@@ -46,12 +53,14 @@ const teamMembers = [
     avatar: "images/user/s1rius.jpg",
     quote: "剑未佩妥，出门已是江湖",
     blog: "https://s1rius.space/",
+    destination: "在校",
   },
   {
     id: "Existence",
     direction: "pwn",
     avatar: "images/user/Existence.jpg",
     quote: "Per aspera ad astra",
+    destination: "在校",
   },
   {
     id: "祈染安",
@@ -59,12 +68,14 @@ const teamMembers = [
     avatar: "images/user/祈染安.jpg",
     quote: "当观水月，莫怨松风",
     blog: "https://qiranan.github.io/",
+    destination: "在校",
   },
   {
     id: "陌丄未央",
     direction: "misc",
     avatar: "images/user/陌丄未央.jpg",
     quote: "努力成为大手子ing…",
+    destination: "在校",
   },
   {
     id: "Pretend",
@@ -72,6 +83,7 @@ const teamMembers = [
     avatar: "images/user/Pretend.jpg",
     quote: "试试就试试!",
     blog: "https://pretend-art.github.io/",
+    destination: "在校",
   },
   {
     id: "晨昏蒙影",
@@ -79,6 +91,7 @@ const teamMembers = [
     avatar: "images/user/晨昏蒙影.jpg",
     quote: "自强不息",
     blog: "https://grrchmy.cn/",
+    destination: "在校",
   },
   {
     id: "pencil_fish",
@@ -86,6 +99,7 @@ const teamMembers = [
     avatar: "images/user/pencil_fish.jpg",
     quote: "我是一条坐在椅子上的鱼",
     blog: "https://pencilfishdaydream.fun/",
+    destination: "在校",
   },
 ];
 
@@ -99,6 +113,23 @@ function createTextElement(tagName, className, text) {
 function createMemberCard(member) {
   const card = document.createElement("article");
   card.className = "member-card reveal";
+
+  // Add 3D tilt effect on mouse move
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+
+    card.style.transform = `translate3d(0, -12px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
 
   const photo = document.createElement("div");
   photo.className = "member-photo";
@@ -132,6 +163,17 @@ function createMemberCard(member) {
   info.className = "member-info";
   info.appendChild(createTextElement("h3", "member-name", member.id));
   info.appendChild(createTextElement("p", "member-quote", member.quote || ""));
+
+  if (member.destination) {
+    const next = document.createElement("div");
+    next.className = "member-next";
+    next.appendChild(createTextElement("span", "member-next-label", "STATUS / 状态"));
+    next.appendChild(createTextElement("span", "member-next-value", member.destination));
+    if (member.destinationNote) {
+      next.appendChild(createTextElement("span", "member-next-note", member.destinationNote));
+    }
+    info.appendChild(next);
+  }
 
   card.appendChild(photo);
   card.appendChild(info);
@@ -176,7 +218,7 @@ function setupReveal() {
   );
 
   revealItems.forEach((item, index) => {
-    const isDenseListItem = item.closest(".team-grid, .achievement-list");
+    const isDenseListItem = item.closest(".team-grid");
     const delayStep = isDenseListItem ? index % 8 : 0;
     item.style.setProperty("--reveal-delay", `${delayStep * 32}ms`);
     if (item.getBoundingClientRect().top < window.innerHeight * 0.96) {
@@ -936,6 +978,108 @@ function setupJoinModal() {
   });
 }
 
+function setupHonorDeck() {
+  const deck = document.querySelector("[data-honor-deck]");
+  if (!deck) return;
+
+  const stage = deck.querySelector("[data-honor-stage]");
+  const slides = Array.from(deck.querySelectorAll("[data-honor-slide]"));
+  const progress = deck.querySelector("[data-honor-progress]");
+  const prevButton = deck.querySelector("[data-honor-prev]");
+  const nextButton = deck.querySelector("[data-honor-next]");
+  const currentLabel = deck.querySelector("[data-honor-current]");
+  const totalLabel = deck.querySelector(".honor-counter span:last-child");
+  const status = deck.querySelector("[data-honor-status]");
+  if (!stage || !slides.length || !progress || !prevButton || !nextButton || !currentLabel) return;
+
+  const total = slides.length;
+  const pad = (value) => String(value).padStart(2, "0");
+  let index = 0;
+  let pointerStart = null;
+
+  const segments = slides.map(() => {
+    const segment = document.createElement("span");
+    segment.className = "honor-progress-seg";
+    progress.appendChild(segment);
+    return segment;
+  });
+
+  function goTo(nextIndex) {
+    const target = Math.max(0, Math.min(total - 1, nextIndex));
+    if (target === index && deck.classList.contains("is-ready")) return;
+    index = target;
+
+    slides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === index;
+      slide.classList.toggle("is-active", isActive);
+      slide.classList.toggle("is-before", slideIndex < index);
+      slide.setAttribute("aria-hidden", String(!isActive));
+      if ("inert" in slide) {
+        slide.inert = !isActive;
+      } else if (isActive) {
+        slide.removeAttribute("inert");
+      } else {
+        slide.setAttribute("inert", "");
+      }
+    });
+
+    segments.forEach((segment, segmentIndex) => {
+      segment.classList.toggle("is-active", segmentIndex === index);
+      segment.classList.toggle("is-past", segmentIndex < index);
+    });
+
+    currentLabel.textContent = pad(index + 1);
+    if (totalLabel) totalLabel.textContent = pad(total);
+    prevButton.disabled = index === 0;
+    nextButton.disabled = index === total - 1;
+
+    if (status) {
+      status.textContent = `第 ${index + 1} 页，共 ${total} 页：${slides[index].dataset.honorTitle || ""}`;
+    }
+  }
+
+  prevButton.addEventListener("click", () => goTo(index - 1));
+  nextButton.addEventListener("click", () => goTo(index + 1));
+
+  deck.addEventListener("keydown", (event) => {
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      goTo(index - 1);
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      goTo(index + 1);
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      goTo(0);
+    } else if (event.key === "End") {
+      event.preventDefault();
+      goTo(total - 1);
+    }
+  });
+
+  stage.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse") return;
+    pointerStart = { x: event.clientX, y: event.clientY };
+  });
+
+  stage.addEventListener("pointerup", (event) => {
+    if (!pointerStart) return;
+    const deltaX = event.clientX - pointerStart.x;
+    const deltaY = event.clientY - pointerStart.y;
+    pointerStart = null;
+    if (Math.abs(deltaX) < 44 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
+    goTo(index + (deltaX < 0 ? 1 : -1));
+  });
+
+  stage.addEventListener("pointercancel", () => {
+    pointerStart = null;
+  });
+
+  goTo(0);
+  deck.classList.add("is-ready");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderTeam();
   setupHeroIntro();
@@ -944,6 +1088,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupDraggableHud();
   setupNavigation();
   setupJoinModal();
+  setupHonorDeck();
   setupReveal();
   setupButtonPress();
 });
