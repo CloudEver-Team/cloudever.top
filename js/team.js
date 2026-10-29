@@ -113,23 +113,7 @@ function createTextElement(tagName, className, text) {
 function createMemberCard(member) {
   const card = document.createElement("article");
   card.className = "member-card reveal";
-
-  // Add 3D tilt effect on mouse move
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 20;
-    const rotateY = (centerX - x) / 20;
-
-    card.style.transform = `translate3d(0, -12px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
-
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
+  card.dataset.direction = String(member.direction).split("/")[0].trim().toLowerCase();
 
   const photo = document.createElement("div");
   photo.className = "member-photo";
@@ -241,8 +225,8 @@ function setupButtonPress() {
       button.classList.add("is-pressed");
     });
 
-    button.addEventListener("animationend", () => {
-      button.classList.remove("is-pressed");
+    ["pointerup", "pointercancel", "pointerleave", "blur"].forEach((eventName) => {
+      button.addEventListener(eventName, () => button.classList.remove("is-pressed"));
     });
   });
 }
@@ -275,34 +259,8 @@ function typeHeroText(element, text, onComplete) {
 
 function setupHeroIntro() {
   const hero = document.querySelector(".hero");
-  const subtitle = hero?.querySelector(".hero-subtitle");
-  if (!hero || !subtitle) return;
-
-  const originalText = subtitle.textContent.replace(/\s+/g, " ").trim();
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let hudReady = false;
-
-  const markHudReady = () => {
-    if (hudReady) return;
-    hudReady = true;
-    hero.classList.add("is-hud-ready");
-    hero.dispatchEvent(new CustomEvent("hero-hud-ready"));
-  };
-
-  if (prefersReducedMotion) {
-    subtitle.textContent = originalText;
-    subtitle.classList.add("is-typed");
-    markHudReady();
-    return;
-  }
-
-  subtitle.textContent = "";
-  window.setTimeout(markHudReady, 2360);
-  window.setTimeout(() => {
-    typeHeroText(subtitle, originalText, () => {
-      window.setTimeout(markHudReady, 120);
-    });
-  }, 1540);
+  if (!hero) return;
+  hero.classList.add("is-hud-ready");
 }
 
 function renderAsciiOrbit(angleA, angleB) {

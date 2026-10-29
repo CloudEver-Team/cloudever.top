@@ -5,128 +5,212 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="CloudEver Team - 云南大学 CTF 校队官网" />
-  <title>CloudEver Team</title>
+  <meta name="theme-color" content="#202121" />
+  <title>CloudEver Team · 云南大学 CTF 校队</title>
   <script>document.documentElement.classList.add("js-enabled");</script>
   <link rel="icon" type="image/png" href="images/logo-symbol.png" />
-  <link rel="preload" as="image" href="images/banner.jpg" />
   <link rel="preload" as="image" href="images/logo-symbol.png" />
   <link rel="stylesheet" href="css/all.min.css" />
-  <link rel="stylesheet" href="css/css2.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/endfield.css" />
 </head>
 
 <body>
-  <header class="site-header" data-header>
-    <a class="brand" href="#home" aria-label="CloudEver 首页">
-      <span class="brand-mark">
-        <img src="images/logo-symbol.png" alt="" />
-      </span>
-      <span class="brand-copy">
-        <strong>CloudEver</strong>
-        <span>YNU CTF Team</span>
+  <a class="skip-link" href="#home">跳到主要内容</a>
+  <div class="page-grid" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+
+  <header class="hud-header" data-header>
+    <a class="hud-brand" href="#home" aria-label="CloudEver 首页">
+      <img class="hud-brand-mark" src="images/logo-symbol.png" alt="" />
+      <span class="hud-brand-text">
+        <strong>CLOUD<span>EVER</span></strong>
+        <em>YNU CTF TEAM</em>
       </span>
     </a>
 
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
-      <i class="fas fa-bars" aria-hidden="true"></i>
+    <button class="hud-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span></span><span></span><span></span>
       <span class="sr-only">打开导航</span>
     </button>
 
-    <nav class="site-nav" id="site-nav" aria-label="主导航" data-nav>
-      <a href="#home">首页</a>
-      <a href="#team">队员</a>
-      <a href="#achievements">战绩</a>
-      <a href="#contact">加入</a>
+    <nav class="hud-nav" id="site-nav" data-nav aria-label="主导航">
+      <a href="#profile" data-nav-link><b>01</b>方向</a>
+      <a href="#team" data-nav-link><b>02</b>队员</a>
+      <a href="#achievements" data-nav-link><b>03</b>战绩</a>
+      <a href="#disclosure" data-nav-link><b>04</b>披露</a>
+      <a href="#contact" data-nav-link><b>05</b>加入</a>
     </nav>
+
+    <div class="hud-header-side" aria-hidden="true">
+      <span class="hud-clock" data-hud-clock>--:--:--</span>
+      <span class="hud-loc">KMG / CN</span>
+    </div>
   </header>
 
   <main>
-    <section class="hero" id="home" data-section>
-      <canvas id="particle-canvas" class="particle-canvas"></canvas>
-      <div class="hero-grid-overlay"></div>
-      <img class="hero-full-image" src="images/banner.jpg" alt="CloudEver CTF Team" />
+    <!-- 00 / COVER -->
+    <section class="hero is-hud-ready" id="home" data-section aria-labelledby="cover-title">
+      <div class="hero-ghost" aria-hidden="true">CLOUDEVER</div>
+      <span class="hero-side" aria-hidden="true">YNU / SECURITY RESEARCH / EST. 2024</span>
       <div class="hero-inner">
-        <div class="hero-content">
-          <div class="hero-copy">
-            <h1 data-text="CloudEver Team">CloudEver Team</h1>
-            <p class="hero-subtitle">
-              云南大学CTF校队，成立于2024，致力于网络安全研究、漏洞分析与CTF赛事。迄今为止战队已经在多场重要比赛中获奖，多名队员任职于Nu1l安全团队，山海关安全团队，星盟安全团队，V&N安全团队，阿里云，南天信息等。
-            </p>
-          </div>
-
-          <div class="hero-ops">
-            <div class="hero-status" aria-label="战队概览">
-              <div class="stat-item">
-                <span>Since</span>
-                <strong>2024</strong>
-              </div>
-              <div class="stat-divider"></div>
-              <div class="stat-item">
-                <span>Roster</span>
-                <strong>13+</strong>
-              </div>
-              <div class="stat-divider"></div>
-              <div class="stat-item">
-                <span>Honors</span>
-                <strong>10+</strong>
-              </div>
-            </div>
+        <div class="hero-kicker">
+          <span class="kicker-mark" aria-hidden="true"></span>
+          <span>云南大学 / YUNNAN UNIVERSITY CTF TEAM</span>
+          <i aria-hidden="true"></i>
+        </div>
+        <div class="cover-dots" aria-hidden="true"></div>
+        <div class="cover-registration" aria-hidden="true">
+          <b>云端之上<br>探索不止</b>
+          <span><i></i> CLOUDEVER / EST. 2024</span><br>
+          <span>SECURITY RESEARCH COLLECTIVE<br>KUNMING, YUNNAN / CN</span>
+        </div>
+        <div class="hero-pass-group" aria-hidden="true">
+          <div class="hero-pass">
+            <div class="pass-top"><span>ACCESS PASS</span><span>CE—01</span></div>
+            <div class="pass-visual"><img src="images/logo-symbol.png" alt="" fetchpriority="high"></div>
+            <div class="pass-label">CLOUD<small>SECURITY DIV.</small></div>
+            <div class="pass-barcode"></div>
           </div>
         </div>
-
-        <aside class="hero-dashboard" data-hero-hud aria-label="CloudEver operation console">
-          <div class="hud-panel code-panel" data-hud-drag="rotor">
-            <div class="hud-topline">
-              <span>booting</span>
-              <i aria-hidden="true"></i>
-            </div>
-            <div class="code-orbit">
-              <pre class="orbit-canvas" data-ascii-orbit aria-hidden="true"></pre>
-            </div>
-          </div>
-
-          <div class="hud-panel terminal-panel" data-hud-drag="terminal">
-            <div class="hud-topline">
-              <span>guest@cloudever</span>
-              <i aria-hidden="true"></i>
-            </div>
-            <div class="terminal-output" data-terminal-output aria-live="polite"></div>
-            <label class="terminal-input-line">
-              <span>$</span>
-              <input data-terminal-input type="text" autocomplete="off" spellcheck="false" aria-label="Terminal command" />
-            </label>
-          </div>
-        </aside>
-      </div>
-
-    </section>
-
-    <section class="section team-section" id="team" data-section>
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Roster</p>
-          <h2>OPERATORS</h2>
-          <p class="section-desc">// Elite Cyber Security Team</p>
+        <div class="hero-title-block">
+          <h1 class="hero-title" id="cover-title">CLOUDEVER</h1>
+          <div class="hero-team-bar"><span class="hero-team-word">TEAM</span><span class="hero-team-sub">CAPTURE THE FLAG / YNU</span></div>
         </div>
-
-        <div class="team-grid" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <section class="section achievements-section" id="achievements" data-section aria-labelledby="achievements-title">
-      <div class="container">
-        <div class="section-head honors-head reveal">
+        <span class="cover-coordinate" aria-hidden="true">FIELD NOTES / 00 — EXPLOIT THE UNKNOWN</span>
+        <a class="cover-arrow" href="#profile" aria-label="探索战队技术方向">↘</a>
+        <div class="hero-bottom">
           <div>
-            <p class="eyebrow">Scoreboard</p>
-            <h2 id="achievements-title">荣誉战绩</h2>
+            <p class="hero-cn">云南大学 <em>CTF</em> 校队</p>
+            <p class="hero-subtitle">始于热爱，保持好奇。在代码与漏洞之间寻找答案，<br>以攻促防，以赛代练，一起探索安全的边界。</p>
           </div>
-          <p class="honors-count"><strong>10</strong> HONORS <i>/</i> <strong>08</strong> EVENTS</p>
+          <dl class="hero-stats" aria-label="战队概况">
+            <div><dt>ESTABLISHED</dt><dd>2024</dd></div>
+            <div><dt>OPERATORS</dt><dd>13</dd></div>
+            <div><dt>HONORS</dt><dd>10<span>+</span></dd></div>
+            <div><dt>CVE / GHSA</dt><dd>11</dd></div>
+          </dl>
+        </div>
+      </div>
+      <a class="hero-scroll" href="#profile"><span>SCROLL TO EXPLORE</span><i aria-hidden="true"></i></a>
+    </section>
+
+    <!-- 01 / TECHNICAL FOCUS -->
+    <section class="section profile" id="profile" data-section aria-labelledby="profile-title">
+      <div class="section-inner">
+        <header class="section-head reveal">
+          <span class="section-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M16 2 30 16 16 30 2 16Z"/><path d="m10 16 4 4 8-8"/></svg>
+          </span>
+          <div class="section-titles"><h2 id="profile-title">方向</h2><p>TECHNICAL FOCUS</p></div>
+          <span class="section-index"><em>01</em><i>/</i><span>SKILL SET</span></span>
+        </header>
+        <span class="section-rule" aria-hidden="true"></span>
+        <div class="skill-grid">
+          <article class="skill-card reveal">
+            <div class="skill-symbol" aria-hidden="true"><i class="fas fa-microchip"></i></div>
+            <div class="skill-meta"><span>研究方向</span><b>01 / BINARY</b></div>
+            <h3>PWN<small>二进制安全</small></h3><p>内存攻防 / 漏洞利用 / 系统安全</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="skill-symbol" aria-hidden="true"><i class="fas fa-code"></i></div>
+            <div class="skill-meta"><span>研究方向</span><b>02 / WEB</b></div>
+            <h3>WEB<small>应用安全</small></h3><p>代码审计 / Web 攻防 / 漏洞挖掘</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="skill-symbol" aria-hidden="true"><i class="fas fa-project-diagram"></i></div>
+            <div class="skill-meta"><span>研究方向</span><b>03 / REVERSE</b></div>
+            <h3>REVERSE<small>逆向工程</small></h3><p>程序分析 / 逻辑还原 / 逆向调试</p>
+          </article>
+          <article class="skill-card reveal">
+            <div class="skill-symbol" aria-hidden="true"><i class="fas fa-fingerprint"></i></div>
+            <div class="skill-meta"><span>研究方向</span><b>04 / MISC</b></div>
+            <h3>MISC<small>安全杂项</small></h3><p>数字取证 / 隐写分析 / 综合探索</p>
+          </article>
+        </div>
+        <div class="profile-grid">
+          <article class="profile-main reveal">
+            <p class="panel-label">[ TEAM PROFILE ] / 战队档案</p>
+            <h3>以攻促防，<span>以赛代练。</span></h3>
+            <p>CloudEver 成立于 2024 年，是云南大学 CTF 校队。我们专注于网络安全研究、漏洞分析与 CTF 赛事，在实战中积累经验，也将研究成果回馈安全社区。</p>
+            <p>从一道题的灵光乍现，到一次漏洞的深入追踪。这里有并肩探索的队友，也有始终向前的好奇心。</p>
+            <ul class="profile-tags" aria-label="战队活动"><li>CTF 竞赛</li><li>安全研究</li><li>技术分享</li></ul>
+          </article>
+          <aside class="terminal-panel reveal" aria-label="CloudEver 交互终端">
+            <div class="hud-topline"><i aria-hidden="true"></i><span>guest@cloudever:~</span><em>INTERACTIVE / TTY-01</em></div>
+            <div class="terminal-output" data-terminal-output aria-live="polite"></div>
+            <label class="terminal-input-line"><span>$</span><input data-terminal-input type="text" autocomplete="off" spellcheck="false" aria-label="Terminal command"></label>
+            <div class="terminal-foot">输入 <b>help</b> 探索命令 · 输入 <b>linux</b> 启动浏览器内 Linux</div>
+          </aside>
+        </div>
+        <div class="profile-strip" aria-hidden="true"><span>SECURITY RESEARCH</span><i></i><span>CAPTURE THE FLAG</span><i></i><span>VULNERABILITY DISCLOSURE</span><i></i><span>NEVER STOP EXPLORING</span></div>
+      </div>
+    </section>
+
+    <!-- 02 / ROSTER -->
+    <section class="section roster" id="team" data-section>
+      <div class="section-inner">
+        <header class="section-head reveal">
+          <span class="section-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M16 3 29 16 16 29 3 16Z" /><circle cx="16" cy="13" r="3.4" /><path d="M9.5 23c1.1-3.1 3.5-4.7 6.5-4.7s5.4 1.6 6.5 4.7" /></svg>
+          </span>
+          <div class="section-titles">
+            <h2>队员</h2>
+            <p>TEAM COMPOSITION</p>
+          </div>
+          <span class="section-index"><em>02</em><i>/</i><span>ROSTER</span></span>
+        </header>
+        <span class="section-rule" aria-hidden="true"></span>
+
+        <div class="roster-meta reveal">
+          <p><strong>13</strong> ACTIVE OPERATORS</p>
+          <ul class="direction-legend" aria-label="方向图例">
+            <li><i class="dot dot--pwn"></i>PWN</li>
+            <li><i class="dot dot--web"></i>WEB</li>
+            <li><i class="dot dot--re"></i>RE</li>
+            <li><i class="dot dot--misc"></i>MISC</li>
+          </ul>
+          <p class="roster-note">// MEET THE OPERATORS</p>
         </div>
 
-        <div class="scoreboard honor-deck" data-honor-deck>
-          <div class="honor-stage" data-honor-stage tabindex="0" role="region" aria-roledescription="carousel" aria-label="竞赛荣誉分页，共 9 页，使用左右方向键翻页">
+        <div class="roster-grid">
+          <div class="team-grid" aria-live="polite"></div>
+          <a class="roster-recruit reveal" href="#contact">
+            <span class="recruit-plus" aria-hidden="true">+</span>
+            <strong>RECRUIT</strong>
+            <span>下一个席位，等你加入</span>
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <span class="section-ghost" aria-hidden="true">02</span>
+    </section>
+
+    <!-- 03 / SCOREBOARD -->
+    <section class="section honors" id="achievements" data-section aria-labelledby="achievements-title">
+      <div class="section-inner">
+        <header class="section-head reveal">
+          <span class="section-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M16 2 30 16 16 30 2 16Z" /><path d="M11 23V13l5-4 5 4v10M11 17h10" /></svg>
+          </span>
+          <div class="section-titles">
+            <h2 id="achievements-title">战绩</h2>
+            <p>HONOR RECORD</p>
+          </div>
+          <span class="section-index"><em>03</em><i>/</i><span>HONORS</span></span>
+        </header>
+        <span class="section-rule" aria-hidden="true"></span>
+
+        <div class="honors-meta reveal">
+          <p><strong>10</strong> HONORS <i>/</i> <strong>08</strong> EVENTS</p>
+          <p class="honors-years">2024 — 2026</p>
+          <p class="roster-note">// USE ARROW KEYS OR SWIPE</p>
+        </div>
+
+        <div class="scoreboard honor-deck reveal" data-honor-deck>
+          <div class="honor-stage" data-honor-stage tabindex="0" role="region" aria-roledescription="carousel" aria-label="竞赛荣誉分页，共 8 页，使用左右方向键翻页">
             <div class="honor-track" id="honor-track" data-honor-track>
-              <article class="honor-slide is-active" data-honor-slide data-tone="gold" data-honor-title="软件系统安全赛" aria-roledescription="slide" aria-label="1 / 9 软件系统安全赛">
+              <article class="honor-slide is-active" data-honor-slide data-tone="gold" data-honor-title="软件系统安全赛" aria-roledescription="slide" aria-label="1 / 8 软件系统安全赛">
                 <div class="honor-copy">
                   <div class="honor-meta">
                     <span class="honor-index">01 / HONOR</span>
@@ -146,7 +230,7 @@
                 </div>
               </article>
 
-              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="数字中国数据安全赛" aria-roledescription="slide" aria-label="2 / 9 数字中国数据安全赛" aria-hidden="true" inert>
+              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="数字中国数据安全赛" aria-roledescription="slide" aria-label="2 / 8 数字中国数据安全赛" aria-hidden="true" inert>
                 <div class="honor-copy">
                   <div class="honor-meta">
                     <span class="honor-index">02 / HONOR</span>
@@ -166,7 +250,7 @@
                 </div>
               </article>
 
-              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="腾讯黑客松智能渗透挑战赛" aria-roledescription="slide" aria-label="3 / 9 第二届腾讯黑客松智能渗透挑战赛" aria-hidden="true" inert>
+              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="腾讯黑客松智能渗透挑战赛" aria-roledescription="slide" aria-label="3 / 8 第二届腾讯黑客松智能渗透挑战赛" aria-hidden="true" inert>
                 <div class="honor-copy">
                   <div class="honor-meta">
                     <span class="honor-index">03 / HONOR</span>
@@ -186,7 +270,7 @@
                 </div>
               </article>
 
-              <article class="honor-slide" data-honor-slide data-tone="gold" data-honor-title="全国大学生信息安全竞赛" aria-roledescription="slide" aria-label="4 / 9 全国大学生信息安全竞赛，三次获奖" aria-hidden="true" inert>
+              <article class="honor-slide" data-honor-slide data-tone="gold" data-honor-title="全国大学生信息安全竞赛" aria-roledescription="slide" aria-label="4 / 8 全国大学生信息安全竞赛，三次获奖" aria-hidden="true" inert>
                 <div class="honor-copy">
                   <div class="honor-meta">
                     <span class="honor-index">04 / HONOR</span>
@@ -209,7 +293,7 @@
                 </div>
               </article>
 
-              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="云南省实网攻防演练" aria-roledescription="slide" aria-label="5 / 9 云南省实网攻防演练" aria-hidden="true" inert>
+              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="云南省实网攻防演练" aria-roledescription="slide" aria-label="5 / 8 云南省实网攻防演练" aria-hidden="true" inert>
                 <div class="honor-copy">
                   <div class="honor-meta">
                     <span class="honor-index">05 / HONOR</span>
@@ -230,7 +314,7 @@
                 </div>
               </article>
 
-              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="云南省护航云网二进制逆向挑战赛" aria-roledescription="slide" aria-label="6 / 9 云南省护航云网二进制逆向挑战赛" aria-hidden="true" inert>
+              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="云南省护航云网二进制逆向挑战赛" aria-roledescription="slide" aria-label="6 / 8 云南省护航云网二进制逆向挑战赛" aria-hidden="true" inert>
                 <div class="honor-copy">
                   <div class="honor-meta">
                     <span class="honor-index">06 / HONOR</span>
@@ -251,7 +335,7 @@
                 </div>
               </article>
 
-              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="蓝桥杯网络安全赛道" aria-roledescription="slide" aria-label="7 / 9 蓝桥杯网络安全赛道" aria-hidden="true" inert>
+              <article class="honor-slide" data-honor-slide data-tone="cyan" data-honor-title="蓝桥杯网络安全赛道" aria-roledescription="slide" aria-label="7 / 8 蓝桥杯网络安全赛道" aria-hidden="true" inert>
                 <div class="honor-copy">
                   <div class="honor-meta">
                     <span class="honor-index">07 / HONOR</span>
@@ -272,7 +356,7 @@
                 </div>
               </article>
 
-              <article class="honor-slide" data-honor-slide data-tone="gold" data-honor-title="中国工业互联网安全大赛" aria-roledescription="slide" aria-label="8 / 9 中国工业互联网安全大赛" aria-hidden="true" inert>
+              <article class="honor-slide" data-honor-slide data-tone="gold" data-honor-title="中国工业互联网安全大赛" aria-roledescription="slide" aria-label="8 / 8 中国工业互联网安全大赛" aria-hidden="true" inert>
                 <div class="honor-copy">
                   <div class="honor-meta">
                     <span class="honor-index">08 / HONOR</span>
@@ -291,75 +375,6 @@
                   <span class="honor-rank-label">THIRD</span>
                 </div>
               </article>
-
-              <article class="honor-slide honor-slide--cve" data-honor-slide data-tone="alert" data-honor-title="漏洞挖掘与公开披露" aria-roledescription="slide" aria-label="9 / 9 漏洞挖掘与公开披露" aria-hidden="true" inert>
-                <div class="cve-head">
-                  <div class="cve-heading">
-                    <div class="honor-meta">
-                      <span class="honor-index">09 / DISCLOSURE</span>
-                      <span>2026</span>
-                    </div>
-                    <p class="honor-kicker">CVE / GHSA</p>
-                    <h3 class="cve-title">漏洞挖掘与公开披露</h3>
-                    <p class="cve-summary"><strong>2</strong> CRITICAL<span>/</span><strong>6</strong> HIGH<span>/</span><strong>3</strong> NEW</p>
-                  </div>
-                  <div class="cve-count" aria-hidden="true">
-                    <strong>11</strong>
-                    <span>PUBLIC</span>
-                  </div>
-                </div>
-                <ul class="cve-grid" aria-label="11 项公开披露">
-                  <li class="cve-card is-critical" aria-label="CVE-2026-54143，CVSS 9.8，严重">
-                    <span class="cve-id">CVE-2026-54143</span>
-                    <strong class="cve-score">9.8</strong>
-                  </li>
-                  <li class="cve-card is-critical" aria-label="CVE-2026-54141，CVSS 9.0，严重">
-                    <span class="cve-id">CVE-2026-54141</span>
-                    <strong class="cve-score">9.0</strong>
-                  </li>
-                  <li class="cve-card" aria-label="CVE-2026-45727，CVSS 8.2，高危">
-                    <span class="cve-id">CVE-2026-45727</span>
-                    <strong class="cve-score">8.2</strong>
-                  </li>
-                  <li class="cve-card" aria-label="CVE-2026-49393，CVSS 7.8，高危">
-                    <span class="cve-id">CVE-2026-49393</span>
-                    <strong class="cve-score">7.8</strong>
-                  </li>
-                  <li class="cve-card" aria-label="CVE-2026-50529，CVSS 7.5，高危">
-                    <span class="cve-id">CVE-2026-50529</span>
-                    <strong class="cve-score">7.5</strong>
-                  </li>
-                  <li class="cve-card" aria-label="CVE-2026-50530，CVSS 7.5，高危">
-                    <span class="cve-id">CVE-2026-50530</span>
-                    <strong class="cve-score">7.5</strong>
-                  </li>
-                  <li class="cve-card is-long" aria-label="GHSA-vgrc-hq28-p3xp，CVSS 7.4，高危">
-                    <span class="cve-id">GHSA-vgrc-hq28-p3xp</span>
-                    <strong class="cve-score">7.4</strong>
-                  </li>
-                  <li class="cve-card" aria-label="CVE-2026-54144，CVSS 7.4，高危">
-                    <span class="cve-id">CVE-2026-54144</span>
-                    <strong class="cve-score">7.4</strong>
-                  </li>
-                  <li class="cve-card is-new" aria-label="CVE-2026-54339，新增公开披露">
-                    <span class="cve-id">CVE-2026-54339</span>
-                    <span class="cve-new">NEW</span>
-                  </li>
-                  <li class="cve-card is-new" aria-label="CVE-2026-69160，新增公开披露">
-                    <span class="cve-id">CVE-2026-69160</span>
-                    <span class="cve-new">NEW</span>
-                  </li>
-                  <li class="cve-card is-new" aria-label="CVE-2026-102663，新增公开披露">
-                    <span class="cve-id">CVE-2026-102663</span>
-                    <span class="cve-new">NEW</span>
-                  </li>
-                  <li class="cve-card cve-card--summary" aria-hidden="true">
-                    <strong class="cve-summary-count">+03</strong>
-                    <span class="cve-summary-label">NEW</span>
-                  </li>
-                </ul>
-                <p class="cve-foot"><span>2026</span><span>RESPONSIBLE DISCLOSURE</span></p>
-              </article>
             </div>
           </div>
 
@@ -368,7 +383,7 @@
               <i class="fas fa-arrow-left" aria-hidden="true"></i>
             </button>
             <div class="honor-progress" data-honor-progress aria-hidden="true"></div>
-            <p class="honor-counter"><span data-honor-current>01</span><em>/</em><span>09</span></p>
+            <p class="honor-counter"><span data-honor-current>01</span><em>/</em><span>08</span></p>
             <button class="honor-nav" type="button" data-honor-next aria-label="下一页">
               <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </button>
@@ -376,42 +391,149 @@
           <p class="sr-only" data-honor-status aria-live="polite" aria-atomic="true"></p>
         </div>
       </div>
+      <span class="section-ghost" aria-hidden="true">03</span>
     </section>
 
-    <section class="join-section" id="contact" data-section>
-      <div class="join-media" aria-hidden="true">
-        <img src="images/logo-symbol.png" alt="" />
-      </div>
+    <!-- 04 / DISCLOSURE -->
+    <section class="section disclosure" id="disclosure" data-section aria-labelledby="disclosure-title">
+      <div class="section-inner">
+        <header class="section-head reveal">
+          <span class="section-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M16 2 28 9v14l-12 7L4 23V9Z" /><path d="M16 10v8M16 22v.5" /></svg>
+          </span>
+          <div class="section-titles">
+            <h2 id="disclosure-title">披露</h2>
+            <p>SECURITY RESEARCH</p>
+          </div>
+          <span class="section-index"><em>04</em><i>/</i><span>CVE</span></span>
+        </header>
+        <span class="section-rule" aria-hidden="true"></span>
 
-      <div class="container join-content reveal">
-        <p class="eyebrow">Join Us
-        </p>
-        <h2>加入 CloudEver？</h2>
-        <p>
-          我们定期举办面向大一的招新赛事，其他年级也可以投递简历申请加入
-        </p>
-        <div class="join-actions">
-          <button class="btn btn-primary" type="button" data-open-join>
-            <i class="fab fa-qq" aria-hidden="true"></i>
-            <span>获取 QQ 群</span>
-          </button>
-          <a class="btn btn-secondary" href="mailto:root@cloudever.top">
-            <i class="far fa-envelope" aria-hidden="true"></i>
-            <span>发送邮件</span>
-          </a>
+        <div class="disclosure-summary reveal">
+          <div class="cve-count-big">
+            <strong>11</strong>
+            <span>PUBLIC<br />ADVISORIES</span>
+          </div>
+          <div class="cve-split">
+            <p><b>2</b><span>CRITICAL</span></p>
+            <p><b>6</b><span>HIGH</span></p>
+            <p><b>3</b><span>NEW</span></p>
+          </div>
+          <p class="cve-note">2026 / RESPONSIBLE DISCLOSURE</p>
+        </div>
+
+        <ul class="cve-grid reveal" aria-label="11 项公开披露">
+          <li class="cve-card is-critical" aria-label="CVE-2026-54143，CVSS 9.8，严重">
+            <span class="cve-id">CVE-2026-54143</span>
+            <strong class="cve-score">9.8</strong>
+          </li>
+          <li class="cve-card is-critical" aria-label="CVE-2026-54141，CVSS 9.0，严重">
+            <span class="cve-id">CVE-2026-54141</span>
+            <strong class="cve-score">9.0</strong>
+          </li>
+          <li class="cve-card" aria-label="CVE-2026-45727，CVSS 8.2，高危">
+            <span class="cve-id">CVE-2026-45727</span>
+            <strong class="cve-score">8.2</strong>
+          </li>
+          <li class="cve-card" aria-label="CVE-2026-49393，CVSS 7.8，高危">
+            <span class="cve-id">CVE-2026-49393</span>
+            <strong class="cve-score">7.8</strong>
+          </li>
+          <li class="cve-card" aria-label="CVE-2026-50529，CVSS 7.5，高危">
+            <span class="cve-id">CVE-2026-50529</span>
+            <strong class="cve-score">7.5</strong>
+          </li>
+          <li class="cve-card" aria-label="CVE-2026-50530，CVSS 7.5，高危">
+            <span class="cve-id">CVE-2026-50530</span>
+            <strong class="cve-score">7.5</strong>
+          </li>
+          <li class="cve-card is-long" aria-label="GHSA-vgrc-hq28-p3xp，CVSS 7.4，高危">
+            <span class="cve-id">GHSA-vgrc-hq28-p3xp</span>
+            <strong class="cve-score">7.4</strong>
+          </li>
+          <li class="cve-card" aria-label="CVE-2026-54144，CVSS 7.4，高危">
+            <span class="cve-id">CVE-2026-54144</span>
+            <strong class="cve-score">7.4</strong>
+          </li>
+          <li class="cve-card is-new" aria-label="CVE-2026-54339，新增公开披露">
+            <span class="cve-id">CVE-2026-54339</span>
+            <span class="cve-new">NEW</span>
+          </li>
+          <li class="cve-card is-new" aria-label="CVE-2026-69160，新增公开披露">
+            <span class="cve-id">CVE-2026-69160</span>
+            <span class="cve-new">NEW</span>
+          </li>
+          <li class="cve-card is-new" aria-label="CVE-2026-102663，新增公开披露">
+            <span class="cve-id">CVE-2026-102663</span>
+            <span class="cve-new">NEW</span>
+          </li>
+          <li class="cve-card cve-card--summary" aria-hidden="true">
+            <strong class="cve-summary-count">+03</strong>
+            <span class="cve-summary-label">NEW</span>
+          </li>
+        </ul>
+      </div>
+      <span class="section-ghost" aria-hidden="true">04</span>
+    </section>
+
+    <!-- 05 / JOIN -->
+    <section class="section join" id="contact" data-section>
+      <div class="join-marquee" aria-hidden="true">
+        <div>
+          <span>RECRUITING / 2026</span><i>✦</i>
+          <span>JOIN CLOUDEVER</span><i>✦</i>
+          <span>RECRUITING / 2026</span><i>✦</i>
+          <span>JOIN CLOUDEVER</span><i>✦</i>
         </div>
       </div>
+
+      <div class="section-inner">
+        <div class="join-grid">
+          <div class="join-title reveal">
+            <p class="join-kicker">RECRUITMENT / 05</p>
+            <h2>
+              <span class="join-cn">加入</span>
+              <span class="join-en">CLOUD<br />EVER</span>
+            </h2>
+            <p class="join-sub">保持好奇，一起探索未知。</p>
+          </div>
+
+          <div class="join-panel panel reveal">
+            <p class="panel-label">// OPEN CHANNEL</p>
+            <h3>加入 CloudEver？</h3>
+            <p>
+              热爱安全，就从这里出发。我们定期举办面向大一的招新赛，其他年级也欢迎投递简历与作品。无论你擅长 PWN、Web、逆向、杂项，还是刚刚起步，都欢迎加入我们，一起解题、研究、打比赛。
+            </p>
+            <div class="join-actions">
+              <button class="btn btn-primary" type="button" data-open-join>
+                <i class="fab fa-qq" aria-hidden="true"></i>
+                <span>获取 QQ 群</span>
+              </button>
+              <a class="btn btn-ghost" href="mailto:root@cloudever.top">
+                <i class="far fa-envelope" aria-hidden="true"></i>
+                <span>发送邮件</span>
+              </a>
+            </div>
+            <div class="join-channels">
+              <div><span>QQ GROUP</span><strong>785858011</strong></div>
+              <div><span>EMAIL</span><strong>root@cloudever.top</strong></div>
+              <div><span>LOCATION</span><strong>YNU / 昆明</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="section-ghost" aria-hidden="true">05</span>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <strong>CloudEver</strong>
-        <span>YNU CTF Team</span>
-      </div>
-      <p>&copy; 2025-2026 CloudEver. All rights reserved.</p>
-    </div>
+  <footer class="hud-footer">
+    <a class="footer-brand" href="#home">
+      <img src="images/logo-symbol.png" alt="" />
+      <strong>CLOUD<span>EVER</span></strong>
+      <em>YNU CTF TEAM</em>
+    </a>
+    <p>&copy; 2025-2026 CloudEver. All rights reserved.</p>
+    <p class="footer-meta">BUILD 2026.10 <i>/</i> KUNMING <i>/</i> CN</p>
   </footer>
 
   <div class="modal" id="join-modal" hidden>
@@ -420,7 +542,7 @@
       <button class="modal-close" type="button" aria-label="关闭" data-close-join>
         <i class="fas fa-times" aria-hidden="true"></i>
       </button>
-      <p class="eyebrow">Recruit Channel</p>
+      <p class="panel-label">// RECRUIT CHANNEL</p>
       <h2 id="join-title">加入方式</h2>
       <p>请加入 QQ 群联系我们，或通过邮箱发送简历与作品。</p>
       <div class="contact-chip">
@@ -434,8 +556,8 @@
     </div>
   </div>
 
-  <script src="js/particles.js"></script>
   <script src="js/team.js"></script>
+  <script src="js/hud.js"></script>
 </body>
 
 </html>
